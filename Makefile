@@ -8,15 +8,15 @@ sim:
 model-test:
 	python3 model/test_autotune.py
 
-bit: build/top.bin
-build/top.bin: $(SRC) constraints/icebreaker.pcf
+bit: icebrk.bin
+icebrk.bin: $(SRC) constraints/icebreaker.pcf
 	mkdir -p build
 	yosys -q -p "read_verilog $(SRC); synth_ice40 -top top -json build/top.json"
 	nextpnr-ice40 --up5k --package sg48 --freq 12 --json build/top.json --pcf constraints/icebreaker.pcf --asc build/top.asc
 	icepack build/top.asc $@
 
-prog: build/top.bin
+prog: icebrk.bin
 	iceprog $<
 
 clean:
-	rm -rf build/*
+	rm -rf build/* icebrk.bin
