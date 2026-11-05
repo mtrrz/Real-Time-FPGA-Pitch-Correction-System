@@ -5,6 +5,8 @@ sim:
 	mkdir -p build
 	iverilog -g2012 -o build/tb tb/tb_i2s.v rtl/i2s_core.v && vvp build/tb
 	iverilog -g2012 -o build/tbs tb/tb_shifter.v rtl/shifter.v && vvp build/tbs
+	python3 model/gen_vectors.py
+	iverilog -g2012 -o build/tba tb/tb_amdf.v rtl/amdf.v && vvp build/tba
 
 model-test:
 	python3 model/test_autotune.py

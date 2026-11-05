@@ -11,8 +11,8 @@ module tb_shifter;
   integer i, cin = 0, cout = 0, pin = 0, pout = 0;
   initial begin
     for (i = 0; i < 6000; i = i + 1) begin
-      x = $rtoi(8000.0 * $sin(6.283185307 * i / 100.0));
-      valid = 1; @(posedge clk); valid = 0;
+      x <= $rtoi(8000.0 * $sin(6.283185307 * i / 100.0));
+      valid <= 1; @(posedge clk); valid <= 0;
       repeat (8) @(posedge clk);
       if (i >= 3000) begin
         if (pin < 0 && x >= 0) cin = cin + 1;
