@@ -20,7 +20,7 @@ module top_octave (
     .rx_l_o(l), .rx_r_o(), .rx_valid_o(valid)
   );
 
-  shifter sh (.clk_i(clk_o), .valid_i(valid), .x_i(l), .y_o(y));
+  shifter sh (.clk_i(clk_o), .valid_i(valid), .x_i(l), .step_i(-16'sd1024), .y_o(y));   // ratio 2
 
   assign {da_mclk, ad_mclk} = {2{mclk}};
   assign {da_sclk, ad_sclk} = {2{sclk}};

@@ -29,3 +29,17 @@ os.makedirs("build", exist_ok=True)
 open("build/vec_in.hex", "w").write("".join(f"{s & 0xFFF:03x}\n" for s in x))
 open("build/vec_exp.hex", "w").write("".join(f"{w:05x}\n" for e in exp for w in e))
 print("lags per hop:", [e[0] for e in exp])
+
+# ---- quantizer vectors for tb/tb_quant.v (NQ = 260) ----
+from quant_fixed import quant_fixed, BQ, RR, tables
+assert (BQ, RR) == tables()
+assert open("rtl/bq.hex").read() == "".join(f"{v:04x}\n" for v in BQ), "run: python3 model/quant_fixed.py"
+assert open("rtl/rr.hex").read() == "".join(f"{v:05x}\n" for v in RR), "run: python3 model/quant_fixed.py"
+cases = []
+for lag in range(20, 276):                       # every lag, random neighbours around a local minimum
+    b = int(rng.integers(1000, 50000))
+    cases.append((lag, b + int(rng.integers(1, 3000)), b, b + int(rng.integers(0, 3000))))
+cases += [(0, 0, 0, 0), (20, 5, 5, 5), (275, 100, 50, 200), (74, 1000, 10, 1000)]
+assert len(cases) == 260
+open("build/q_in.hex", "w").write("".join(f"{w:05x}\n" for c in cases for w in c))
+open("build/q_exp.hex", "w").write("".join(f"{w & 0xFFFF:05x}\n" for c in cases for w in quant_fixed(*c)))
