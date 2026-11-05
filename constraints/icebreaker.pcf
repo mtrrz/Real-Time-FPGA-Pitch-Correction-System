@@ -1,0 +1,15 @@
+# iCEBreaker v1.x. Pmod I2S2 plugs into PMOD1A (12-pin): top row = DAC, bottom row = ADC.
+# unverified against the Digilent manual, check before powering up
+set_io clk 35
+
+set_io da_mclk  4    # P1A1
+set_io da_lrck  2    # P1A2
+set_io da_sclk  47   # P1A3
+set_io da_sdin  45   # P1A4
+set_io ad_mclk  3    # P1A7
+set_io ad_lrck  48   # P1A8
+set_io ad_sclk  46   # P1A9
+set_io ad_sdout 44   # P1A10
+
+set_io led_r 11      # LEDR_N
+set_io led_g 37      # LEDG_N
