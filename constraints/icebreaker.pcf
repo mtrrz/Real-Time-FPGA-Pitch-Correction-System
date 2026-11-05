@@ -1,15 +1,15 @@
-# iCEBreaker v1.x. Pmod I2S2 plugs into PMOD1A (12-pin): top row = DAC, bottom row = ADC.
-# unverified against the Digilent manual, check before powering up
+# iCEBreaker. Pmod I2S2 on PMOD1B, copied from the lab 4 icebreaker.pcf that produced audio.
+# Top row = DAC (line out, green), bottom row = ADC (line in, blue).
 set_io clk 35
 
-set_io da_mclk  4    # P1A1
-set_io da_lrck  2    # P1A2
-set_io da_sclk  47   # P1A3
-set_io da_sdin  45   # P1A4
-set_io ad_mclk  3    # P1A7
-set_io ad_lrck  48   # P1A8
-set_io ad_sclk  46   # P1A9
-set_io ad_sdout 44   # P1A10
+set_io da_mclk  43   # P1B1  tx_main_clk
+set_io da_lrck  38   # P1B2  tx_lr_clk
+set_io da_sclk  34   # P1B3  tx_data_clk
+set_io da_sdin  31   # P1B4  tx_data
+set_io ad_mclk  42   # P1B7  rx_main_clk
+set_io ad_lrck  36   # P1B8  rx_lr_clk
+set_io ad_sclk  32   # P1B9  rx_data_clk
+set_io ad_sdout 28   # P1B10 rx_data
 
 set_io led_r 11      # LEDR_N
 set_io led_g 37      # LEDG_N

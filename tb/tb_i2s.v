@@ -58,7 +58,7 @@ module tb;
   end
 
   initial begin
-    #(84 * 256 * 30);
+    #(84 * 512 * 30);
     if (errs == 0 && frames > 20) $display("PASS (%0d frames)", frames);
     else $display("FAIL errs=%0d frames=%0d", errs, frames);
     $finish;
